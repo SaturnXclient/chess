@@ -1,32 +1,22 @@
-/* Cosmic theme styles */
+/* Cosmic Chess theme styles */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @keyframes cosmicPulse {
   0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
-
-@keyframes dimensionalShift {
-  0% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
-  25% { transform: perspective(1000px) rotateX(5deg) rotateY(5deg); }
-  75% { transform: perspective(1000px) rotateX(-5deg) rotateY(-5deg); }
-  100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
-}
-
-@keyframes glitchText {
-  0% { text-shadow: 2px 2px #ff00ea, -2px -2px #00ffff; }
-  25% { text-shadow: -2px 2px #ff00ea, 2px -2px #00ffff; }
-  50% { text-shadow: 2px -2px #ff00ea, -2px 2px #00ffff; }
-  75% { text-shadow: -2px -2px #ff00ea, 2px 2px #00ffff; }
-  100% { text-shadow: 2px 2px #ff00ea, -2px -2px #00ffff; }
+  50% { opacity: 1, transform: scale(1.05); }
 }
 
 .cosmic-bg {
   background: 
-    radial-gradient(circle at 50% 50%, rgba(76, 0, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 0%, rgba(255, 0, 234, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 0% 100%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-    #090418;
+    linear-gradient(to bottom, 
+      rgba(13, 14, 20, 0.98), 
+      rgba(16, 17, 28, 0.98)
+    ),
+    repeating-conic-gradient(
+      from 45deg,
+      rgba(76, 0, 255, 0.03) 0deg 90deg,
+      rgba(255, 0, 234, 0.03) 90deg 180deg
+    ) 0 0/60px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -39,45 +29,58 @@
   right: 0;
   bottom: 0;
   background: 
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.05;
+    radial-gradient(circle at 20% 20%, rgba(76, 0, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 234, 0.08) 0%, transparent 40%);
   pointer-events: none;
 }
 
 .cosmic-text {
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  animation: glitchText 5s infinite;
+  text-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.4),
+    0 0 40px rgba(255, 0, 234, 0.2);
+  letter-spacing: 0.5px;
 }
 
 .cosmic-border {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    135deg,
+    rgba(13, 14, 20, 0.95),
+    rgba(16, 17, 28, 0.95)
+  );
   box-shadow: 
-    0 0 20px rgba(76, 0, 255, 0.2),
-    inset 0 0 20px rgba(76, 0, 255, 0.1);
+    0 0 30px rgba(76, 0, 255, 0.15),
+    inset 0 0 30px rgba(76, 0, 255, 0.05);
   backdrop-filter: blur(10px);
 }
 
 .cosmic-glow {
   box-shadow: 
-    0 0 20px rgba(76, 0, 255, 0.3),
-    0 0 40px rgba(255, 0, 234, 0.2),
-    0 0 60px rgba(0, 255, 255, 0.1);
+    0 0 30px rgba(76, 0, 255, 0.2),
+    0 0 50px rgba(255, 0, 234, 0.15),
+    0 0 70px rgba(0, 255, 255, 0.1);
 }
 
 .cosmic-button {
-  background: linear-gradient(45deg, #4c00ff, #ff00ea);
+  background: linear-gradient(45deg, 
+    rgba(76, 0, 255, 0.9),
+    rgba(255, 0, 234, 0.9)
+  );
   border: none;
   color: white;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.2),
+    0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .cosmic-button::before {
@@ -96,60 +99,110 @@
   transition: 0.5s;
 }
 
+.cosmic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 30px rgba(76, 0, 255, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
 .cosmic-button:hover::before {
   left: 100%;
 }
 
 .cosmic-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(13, 14, 20, 0.8);
+  border: 2px solid rgba(76, 0, 255, 0.3);
   color: white;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-family: 'Space Grotesk', sans-serif;
   transition: all 0.3s ease;
+  box-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.1),
+    inset 0 0 10px rgba(76, 0, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .cosmic-input:focus {
-  border-color: #4c00ff;
-  box-shadow: 0 0 10px rgba(76, 0, 255, 0.3);
+  outline: none;
+  border-color: rgba(76, 0, 255, 0.6);
+  box-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.2),
+    0 0 40px rgba(76, 0, 255, 0.1),
+    inset 0 0 15px rgba(76, 0, 255, 0.15);
+  background: rgba(13, 14, 20, 0.9);
 }
 
+.cosmic-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Chess Board Styles */
+.chess-board {
+  border-radius: 12px;
+  padding: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(13, 14, 20, 0.95),
+    rgba(16, 17, 28, 0.95)
+  );
+  box-shadow: 
+    0 0 40px rgba(76, 0, 255, 0.2),
+    0 0 80px rgba(255, 0, 234, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.chess-square-light {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(230, 230, 230, 0.9) 100%);
+}
+
+.chess-square-dark {
+  background: linear-gradient(135deg, rgba(76, 0, 255, 0.9) 0%, rgba(58, 0, 204, 0.9) 100%);
+}
+
+/* Analysis Panel */
+.analysis-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 14, 20, 0.95),
+    rgba(16, 17, 28, 0.95)
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 40px rgba(76, 0, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Move Quality Indicators */
 .move-quality-brilliant {
-  background: radial-gradient(circle at center, #31c4be, #1a6765);
-  animation: cosmicPulse 2s infinite;
+  background: radial-gradient(circle at center, rgba(49, 196, 190, 0.9), rgba(26, 103, 101, 0.9));
+  box-shadow: 0 0 20px rgba(49, 196, 190, 0.4);
 }
 
 .move-quality-great {
-  background: radial-gradient(circle at center, #44d664, #1f6830);
-  animation: cosmicPulse 2s infinite;
+  background: radial-gradient(circle at center, rgba(68, 214, 100, 0.9), rgba(31, 104, 48, 0.9));
+  box-shadow: 0 0 20px rgba(68, 214, 100, 0.4);
 }
 
 .move-quality-good {
-  background: radial-gradient(circle at center, #88cc67, #446633);
-  animation: cosmicPulse 2s infinite;
+  background: radial-gradient(circle at center, rgba(136, 204, 103, 0.9), rgba(68, 102, 51, 0.9));
+  box-shadow: 0 0 20px rgba(136, 204, 103, 0.4);
 }
 
 .move-quality-inaccuracy {
-  background: radial-gradient(circle at center, #dbb357, #6d592b);
-  animation: cosmicPulse 2s infinite;
+  background: radial-gradient(circle at center, rgba(219, 179, 87, 0.9), rgba(109, 89, 43, 0.9));
+  box-shadow: 0 0 20px rgba(219, 179, 87, 0.4);
 }
 
 .move-quality-mistake {
-  background: radial-gradient(circle at center, #db8457, #6d422b);
-  animation: cosmicPulse 2s infinite;
+  background: radial-gradient(circle at center, rgba(219, 132, 87, 0.9), rgba(109, 66, 43, 0.9));
+  box-shadow: 0 0 20px rgba(219, 132, 87, 0.4);
 }
 
 .move-quality-blunder {
-  background: radial-gradient(circle at center, #db5757, #6d2b2b);
-  animation: cosmicPulse 2s infinite;
-}
-
-.chess-piece {
-  transition: transform 0.3s ease;
-}
-
-.chess-piece:hover {
-  transform: translateY(-5px) scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(76, 0, 255, 0.5));
+  background: radial-gradient(circle at center, rgba(219, 87, 87, 0.9), rgba(109, 43, 43, 0.9));
+  box-shadow: 0 0 20px rgba(219, 87, 87, 0.4);
 }

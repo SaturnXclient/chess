@@ -56,7 +56,6 @@ function App() {
     return chess.fen();
   }, [currentGame, moves, currentMoveIndex]);
 
-  // Memoize the analyzeMoveQuality function
   const analyzeMoveQuality = useCallback((score: number) => {
     if (score > 3) return 'brilliant';
     if (score > 2) return 'great';
@@ -77,7 +76,6 @@ function App() {
       const lastMoveObj = chess.history({ verbose: true }).pop();
       if (lastMoveObj) {
         setLastMove({ from: lastMoveObj.from, to: lastMoveObj.to });
-        // Only update move qualities when a new move is made
         const quality = analyzeMoveQuality(Math.random() * 4 - 2);
         setMoveQualities(prev => ({
           ...prev,
@@ -90,33 +88,33 @@ function App() {
   }, [currentGame, moves, currentMoveIndex, analyzeMoveQuality]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <div className="min-h-screen cosmic-bg text-white">
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="border-b border-gray-700 bg-gray-800/50 backdrop-blur-sm sticky top-0 z-50"
+        className="border-b border-white/5 bg-[rgba(13,14,20,0.8)] backdrop-blur-xl sticky top-0 z-50"
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <ChessKnight className="w-8 h-8 text-yellow-400" />
-              <h1 className="text-2xl font-bold">Chess Analysis Pro</h1>
+              <ChessKnight className="w-8 h-8 text-[#4c00ff]" />
+              <h1 className="text-2xl font-bold cosmic-text">Chess Analysis Pro</h1>
             </div>
-            <form onSubmit={handleUsernameSubmit} className="flex gap-2">
+            <form onSubmit={handleUsernameSubmit} className="flex gap-3">
               <div className="relative">
-                <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#4c00ff]" />
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter Chess.com username"
-                  className="pl-10 pr-4 py-2 rounded-lg bg-gray-700/50 border border-gray-600 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all"
+                  className="cosmic-input pl-10 w-64"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-yellow-500 text-gray-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="cosmic-button"
               >
                 {loading ? 'Loading...' : 'Analyze Games'}
               </button>
@@ -146,16 +144,18 @@ function App() {
             className="lg:col-span-2 space-y-6"
           >
             <div className="flex flex-col items-center">
-              <ChessBoard
-                position={getCurrentPosition()}
-                onMove={(move) => {
-                  if (currentGame && currentMoveIndex < moves.length) {
-                    setCurrentMoveIndex(prev => prev + 1);
-                  }
-                }}
-                moveQuality={moveQualities}
-                lastMove={lastMove}
-              />
+              <div className="chess-board">
+                <ChessBoard
+                  position={getCurrentPosition()}
+                  onMove={(move) => {
+                    if (currentGame && currentMoveIndex < moves.length) {
+                      setCurrentMoveIndex(prev => prev + 1);
+                    }
+                  }}
+                  moveQuality={moveQualities}
+                  lastMove={lastMove}
+                />
+              </div>
               <div className="mt-4 w-full max-w-[600px]">
                 <GameControls
                   onFirst={() => setCurrentMoveIndex(0)}
@@ -175,16 +175,19 @@ function App() {
               </div>
             </div>
 
-            <EngineAnalysis
-              fen={getCurrentPosition()}
-              depth={engineDepth}
-              onDepthChange={setEngineDepth}
-            />
+            <div className="analysis-panel">
+              <EngineAnalysis
+                fen={getCurrentPosition()}
+                depth={engineDepth}
+                onDepthChange={setEngineDepth}
+              />
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
+            className="cosmic-border rounded-xl overflow-hidden"
           >
             <GamesList
               games={games}
