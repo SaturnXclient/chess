@@ -1,0 +1,155 @@
+/* Cosmic theme styles */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@keyframes cosmicPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes dimensionalShift {
+  0% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: perspective(1000px) rotateX(5deg) rotateY(5deg); }
+  75% { transform: perspective(1000px) rotateX(-5deg) rotateY(-5deg); }
+  100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+}
+
+@keyframes glitchText {
+  0% { text-shadow: 2px 2px #ff00ea, -2px -2px #00ffff; }
+  25% { text-shadow: -2px 2px #ff00ea, 2px -2px #00ffff; }
+  50% { text-shadow: 2px -2px #ff00ea, -2px 2px #00ffff; }
+  75% { text-shadow: -2px -2px #ff00ea, 2px 2px #00ffff; }
+  100% { text-shadow: 2px 2px #ff00ea, -2px -2px #00ffff; }
+}
+
+.cosmic-bg {
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(76, 0, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(255, 0, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    #090418;
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.cosmic-text {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: glitchText 5s infinite;
+}
+
+.cosmic-border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.2),
+    inset 0 0 20px rgba(76, 0, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.cosmic-glow {
+  box-shadow: 
+    0 0 20px rgba(76, 0, 255, 0.3),
+    0 0 40px rgba(255, 0, 234, 0.2),
+    0 0 60px rgba(0, 255, 255, 0.1);
+}
+
+.cosmic-button {
+  background: linear-gradient(45deg, #4c00ff, #ff00ea);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.cosmic-button:hover::before {
+  left: 100%;
+}
+
+.cosmic-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.cosmic-input:focus {
+  border-color: #4c00ff;
+  box-shadow: 0 0 10px rgba(76, 0, 255, 0.3);
+}
+
+.move-quality-brilliant {
+  background: radial-gradient(circle at center, #31c4be, #1a6765);
+  animation: cosmicPulse 2s infinite;
+}
+
+.move-quality-great {
+  background: radial-gradient(circle at center, #44d664, #1f6830);
+  animation: cosmicPulse 2s infinite;
+}
+
+.move-quality-good {
+  background: radial-gradient(circle at center, #88cc67, #446633);
+  animation: cosmicPulse 2s infinite;
+}
+
+.move-quality-inaccuracy {
+  background: radial-gradient(circle at center, #dbb357, #6d592b);
+  animation: cosmicPulse 2s infinite;
+}
+
+.move-quality-mistake {
+  background: radial-gradient(circle at center, #db8457, #6d422b);
+  animation: cosmicPulse 2s infinite;
+}
+
+.move-quality-blunder {
+  background: radial-gradient(circle at center, #db5757, #6d2b2b);
+  animation: cosmicPulse 2s infinite;
+}
+
+.chess-piece {
+  transition: transform 0.3s ease;
+}
+
+.chess-piece:hover {
+  transform: translateY(-5px) scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(76, 0, 255, 0.5));
+}
